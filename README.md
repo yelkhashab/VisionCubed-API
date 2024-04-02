@@ -69,7 +69,7 @@ Week 2:
 Week 3: 
     - Final touches, deployment, and documentation.
 
-##Nice-to-haves
+## Nice-to-haves
 
 User Account System: Allow users to save and track their progress over time.
 Leaderboard: For users to compare solving times or the number of moves.
