@@ -33,14 +33,14 @@ Custom API: Developed to communicate the cube's state and solution steps between
 ### Sitemap
 
 Home Page: 
-            Start page with navigation links and a prompt to get started.
+			Start page with navigation links and a prompt to get started.
 Solve Page: 
-            Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.
+			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.
 Learn Page: 
-            Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow 
-            along a solution using the Beginner's Method to solve the cube.
+			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow 
+			along a solution using the Beginner's Method to solve the cube.
 Practice Page: 
-            The user can generate a scramble then start a timer to practice solving the cube and track progression.
+			The user can generate a scramble then start a timer to practice solving the cube and track progression.
 
 ### Mockups
 
