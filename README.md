@@ -27,7 +27,6 @@ Libraries: cv2 for color detection and image processing, Kociemba for solving al
 
 ### APIs
 
-Webcam API: Access the user's webcam to capture images of the Rubik's Cube.  
 Custom API: Developed to communicate the cube's state and solution steps between the backend and the frontend.  
 
 ### Sitemap
