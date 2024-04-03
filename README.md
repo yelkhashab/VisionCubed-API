@@ -76,3 +76,9 @@ Leaderboard: For users to compare solving times or the number of moves.
 Tutorial Mode: Guide users through solving the cube manually, step by step.
 
 This proposal outlines a plan to create an innovative tool that combines computer vision, algorithms, and interactive 3D modeling to make solving Rubik's Cubes an engaging and educational experience.
+ 
+## Mockup
+
+### Home Page
+
+![VisionCubed Mockup-1](https://github.com/yelkhashab/VisionCubed/assets/88597501/8cca8ac7-ad86-419d-8912-7cf4b764f3ce)
