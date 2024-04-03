@@ -97,3 +97,4 @@ User Account System: Allow users to save and track their progress over time.
 Leaderboard: For users to compare solving times or the number of moves.  
 Cube Variety: Allow users to use the tool to solve multiple types of cubes (2x2, 4x4, ...).  
 Interactive Controls: Allows users to play, pause, rewind, and fast-forward through the solution animation, facilitating a hands-on learning experience.  
+Select Solving Algorithm: Allows the user to select from a list of solving methods/algorithms. Ranges from slow but easy to optimal but difficult.
