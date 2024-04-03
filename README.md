@@ -15,7 +15,7 @@ The primary users of this application are Rubik's Cube enthusiasts of all skill 
 
 Color Detection: Utilizes the cv2 library for computer vision to detect and categorize the colors of a scrambled Rubik's Cube.  
 Solution Algorithm: Integrates the Kociemba library to calculate the optimal solution steps.  
-Scramble Algorithm: Generates a random set of moves to scramble a cube.
+Scramble Algorithm: Generates a random set of moves to scramble a cube.  
 3D Visualization: Renders a 3D model of the Rubik's Cube using Three.js or Spline, reflecting the initial scrambled state and animating the solution steps.    
 
 ## Implementation
