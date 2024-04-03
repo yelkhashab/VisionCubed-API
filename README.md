@@ -32,15 +32,15 @@ Custom API: Developed to communicate the cube's state and solution steps between
 
 ### Sitemap
 
-Home Page: 
-			Start page with navigation links and a prompt to get started.
-Solve Page: 
-			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.
-Learn Page: 
-			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow 
-			along a solution using the Beginner's Method to solve the cube.
-Practice Page: 
-			The user can generate a scramble then start a timer to practice solving the cube and track progression.
+Home Page:  
+			Start page with navigation links and a prompt to get started.  
+Solve Page:  
+			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.  
+Learn Page:  
+			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow  
+			along a solution using the Beginner's Method to solve the cube.  
+Practice Page:  
+			The user can generate a scramble then start a timer to practice solving the cube and track progression.  
 
 ### Mockups
 
@@ -69,9 +69,9 @@ The primary data involved are the colors for each of the cubies on the cube's fa
 
 ### Endpoints
 
-/scan: POST, receives an image, returns an array of faces and colors.
-/solve: POST, receives the array of faces, returns the solution steps.
-/scramble: GET, returns a set of moves to scramble a cube.
+/scan: POST, receives an image, returns an array of faces and colors.  
+/solve: POST, receives the array of faces, returns the solution steps.  
+/scramble: GET, returns a set of moves to scramble a cube.  
 
 ### Auth
 
@@ -79,17 +79,17 @@ No authentication is required for this version of the application.
 
 ## Roadmap
 
-Week 1: 
-    - Initial setup of the computer vision model.
-    - Integration of the Kociemba library and development of the backend solution logic.
-Week 2: 
-    - Development of the frontend, including 3D modeling and animation. 
-    - Integration between frontend and backend, testing.
-Week 3: 
-    - Final touches, deployment, and documentation.
+Week 1:  
+    - Initial setup of the computer vision model.  
+    - Integration of the Kociemba library and development of the backend solution logic.  
+Week 2:  
+    - Development of the frontend, including 3D modeling and animation.  
+    - Integration between frontend and backend, testing.  
+Week 3:  
+    - Final touches, deployment, and documentation.  
 
 ## Nice-to-haves
 
-User Account System: Allow users to save and track their progress over time.
-Leaderboard: For users to compare solving times or the number of moves.
-Cube Variety: Allow users to use the tool to solve multiple types of cubes (2x2, 4x4, ...).
+User Account System: Allow users to save and track their progress over time.  
+Leaderboard: For users to compare solving times or the number of moves.  
+Cube Variety: Allow users to use the tool to solve multiple types of cubes (2x2, 4x4, ...).  
