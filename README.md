@@ -13,32 +13,34 @@ The primary users of this application are Rubik's Cube enthusiasts of all skill 
 
 ### Features
 
-Color Detection: Utilizes the cv2 library for computer vision to detect and categorize the colors of a scrambled Rubik's Cube.
-Solution Algorithm: Integrates the Kociemba library to calculate the optimal solution steps.
-3D Visualization: Renders a 3D model of the Rubik's Cube using Three.js or Spline, reflecting the initial scrambled state and animating the solution steps.
-Interactive Controls: Allows users to play, pause, rewind, and fast-forward through the solution animation, facilitating a hands-on learning experience.
+Color Detection: Utilizes the cv2 library for computer vision to detect and categorize the colors of a scrambled Rubik's Cube.  
+Solution Algorithm: Integrates the Kociemba library to calculate the optimal solution steps.  
+Scramble Algorithm: Generates a random set of moves to scramble a cube.
+3D Visualization: Renders a 3D model of the Rubik's Cube using Three.js or Spline, reflecting the initial scrambled state and animating the solution steps.    
 
 ## Implementation
 ### Tech Stack
 
-Frontend: React for building the user interface, Three.js/Spline for 3D modeling and animation.
-Backend: Python Flask for handling the computer vision processing and solution computation.
-Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, possibly Socket.IO for real-time communication between the frontend and backend.
+Frontend: React for building the user interface, Three.js/Spline for 3D modeling and animation.  
+Backend: Python Flask for handling the computer vision processing and solution computation. Possibly Knex for api routes. Possibly MySQL for database of user practice history.  
+Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, possibly Socket.IO for real-time communication between the frontend and backend.  
 
 ### APIs
 
-Webcam API: Access the user's webcam to capture images of the Rubik's Cube.
-Custom API: Developed to communicate the cube's state and solution steps between the backend and the frontend.
+Webcam API: Access the user's webcam to capture images of the Rubik's Cube.  
+Custom API: Developed to communicate the cube's state and solution steps between the backend and the frontend.  
 
 ### Sitemap
 
 Home Page:  
-			Start page with navigation links and a prompt to get started.  
+			Start page with navigation links and a prompt to get started. 
+     
 Solve Page:  
 			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.  
+     
 Learn Page:  
-			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow  
-			along a solution using the Beginner's Method to solve the cube.  
+			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow along a solution using the Beginner's Method to solve the cube.  
+     
 Practice Page:  
 			The user can generate a scramble then start a timer to practice solving the cube and track progression.  
 
@@ -82,9 +84,11 @@ No authentication is required for this version of the application.
 Week 1:  
     - Initial setup of the computer vision model.  
     - Integration of the Kociemba library and development of the backend solution logic.  
+    
 Week 2:  
     - Development of the frontend, including 3D modeling and animation.  
-    - Integration between frontend and backend, testing.  
+    - Integration between frontend and backend, testing. 
+      
 Week 3:  
     - Final touches, deployment, and documentation.  
 
@@ -93,3 +97,4 @@ Week 3:
 User Account System: Allow users to save and track their progress over time.  
 Leaderboard: For users to compare solving times or the number of moves.  
 Cube Variety: Allow users to use the tool to solve multiple types of cubes (2x2, 4x4, ...).  
+Interactive Controls: Allows users to play, pause, rewind, and fast-forward through the solution animation, facilitating a hands-on learning experience.  
