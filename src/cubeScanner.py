@@ -8,18 +8,12 @@ color_ranges = {
     'yellow': [(25, 100, 100), (35, 255, 255)],
     'green': [(45, 100, 100), (75, 255, 255)],
     'blue': [(100, 100, 100), (130, 255, 255)],
-    'white': [(0, 0, 100), (180, 50, 255)]
+    'white': [(100, 0, 100), (180, 50, 255)]
 }
 
 def detect_colors(image):
     # Convert the image from BGR to HSV color space
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-    # Create a mask to exclude the white color
-    lower_white = np.array([0, 0, 100])
-    upper_white = np.array([180, 50, 255])
-    white_mask = cv2.inRange(hsv, lower_white, upper_white)
-    hsv[white_mask > 0] = [0, 0, 0]
 
     # Initialize an empty dictionary to store the color masks
     color_masks = {}
@@ -28,10 +22,10 @@ def detect_colors(image):
     for color, (lower, upper) in color_ranges.items():
         # Create a mask for the current color range
         mask = cv2.inRange(hsv, np.array(lower), np.array(upper))
-        
+
         # Apply a threshold to the mask to ignore the background
         _, mask = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
-        
+
         color_masks[color] = mask
 
     return color_masks
@@ -64,12 +58,16 @@ def get_cube_state(color_masks):
             # Calculate the coordinates of the current cubie
             row = i // 3
             col = i % 3
-            x = col * 50 + 25
-            y = row * 50 + 25
+            x1, y1 = col * 50 + 10, row * 50 + 10
+            x2, y2 = col * 50 + 40, row * 50 + 40
 
-            # Check the color of the current cubie
-            if color_masks[color][y, x] == 255:
-                colors[i] = color
+            # Count the number of pixels of each color within the cubie
+            color_counts = {}
+            for c, mask in color_masks.items():
+                color_counts[c] = np.count_nonzero(mask[y1:y2, x1:x2])
+
+            # Assign the color with the maximum count to the current cubie
+            colors[i] = max(color_counts, key=color_counts.get)
 
     return cube_state
 
