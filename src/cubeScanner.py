@@ -47,8 +47,19 @@ def get_cube_state(color_masks):
         'back': ['blue'] * 9
     }
 
+    # Define the mapping of center colors to face names
+    color_to_face = {
+        'green': 'front',
+        'red': 'right',
+        'blue': 'back',
+        'orange': 'left',
+        'white': 'up',
+        'yellow': 'down'
+    }
+
     # Iterate over each face and color
-    for face, colors in cube_state.items():
+    for color, face in color_to_face.items():
+        colors = cube_state[face]
         for i in range(9):
             # Calculate the coordinates of the current cubie
             row = i // 3
@@ -57,10 +68,8 @@ def get_cube_state(color_masks):
             y = row * 50 + 25
 
             # Check the color of the current cubie
-            for color, mask in color_masks.items():
-                if mask[y, x] == 255:
-                    colors[i] = color
-                    break
+            if color_masks[color][y, x] == 255:
+                colors[i] = color
 
     return cube_state
 
@@ -72,30 +81,37 @@ def main():
     cube_state = {}
 
     # Define the face order for scanning
-    face_order = ['up', 'right', 'front', 'down', 'left', 'back']
+    face_order = ['green', 'red', 'blue', 'orange', 'white', 'yellow']
 
     # Iterate over each face
-    for face in face_order:
+    for color in face_order:
         while True:
             # Read a frame from the camera
             ret, frame = cap.read()
 
+            # Detect color masks in the frame
+            color_masks = detect_colors(frame)
+
             # Display the original frame
             cv2.imshow('Rubik\'s Cube', frame)
+
+            # Display the color mask for the current face
+            mask = color_masks[color]
+            cv2.imshow(f'Mask - {color}', mask)
 
             # Wait for the user to press the space key
             key = cv2.waitKey(1) & 0xFF
             if key == ord(' '):
-                # Detect color masks in the frame
-                color_masks = detect_colors(frame)
-
-                # Get the current face state
-                cube_state[face] = get_cube_state(color_masks)[face]
+                # Get the current cube state
+                cube_state = get_cube_state(color_masks)
                 break
 
             # Break the loop if 'q' is pressed
             if key == ord('q'):
                 break
+
+        # Close the mask window for the current face
+        cv2.destroyWindow(f'Mask - {color}')
 
     # Print the final cube state
     for face, colors in cube_state.items():
