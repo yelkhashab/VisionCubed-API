@@ -15,6 +15,12 @@ def detect_colors(image):
     # Convert the image from BGR to HSV color space
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
+    # Create a mask to exclude the white color
+    lower_white = np.array([0, 0, 100])
+    upper_white = np.array([180, 50, 255])
+    white_mask = cv2.inRange(hsv, lower_white, upper_white)
+    hsv[white_mask > 0] = [0, 0, 0]
+
     # Initialize an empty dictionary to store the color masks
     color_masks = {}
 
@@ -62,26 +68,38 @@ def main():
     # Open the default camera
     cap = cv2.VideoCapture(0)
 
-    while True:
-        # Read a frame from the camera
-        ret, frame = cap.read()
+    # Initialize an empty dictionary to store the cube state
+    cube_state = {}
 
-        # Detect color masks in the frame
-        color_masks = detect_colors(frame)
+    # Define the face order for scanning
+    face_order = ['up', 'right', 'front', 'down', 'left', 'back']
 
-        # Get the current cube state
-        cube_state = get_cube_state(color_masks)
+    # Iterate over each face
+    for face in face_order:
+        while True:
+            # Read a frame from the camera
+            ret, frame = cap.read()
 
-        # Print the cube state
-        for face, colors in cube_state.items():
-            print(f"{face}: {colors}")
+            # Display the original frame
+            cv2.imshow('Rubik\'s Cube', frame)
 
-        # Display the original frame
-        cv2.imshow('Rubik\'s Cube', frame)
+            # Wait for the user to press the space key
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord(' '):
+                # Detect color masks in the frame
+                color_masks = detect_colors(frame)
 
-        # Break the loop if 'q' is pressed
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+                # Get the current face state
+                cube_state[face] = get_cube_state(color_masks)[face]
+                break
+
+            # Break the loop if 'q' is pressed
+            if key == ord('q'):
+                break
+
+    # Print the final cube state
+    for face, colors in cube_state.items():
+        print(f"{face}: {colors}")
 
     # Release the camera and close the windows
     cap.release()
