@@ -30,7 +30,7 @@ def detect_colors(image):
 
     return color_masks
 
-def get_cube_state(color_masks):
+def get_cube_state(color_masks, frame):
     # Define the reference cube state
     cube_state = {
         'up': ['white'] * 9,
@@ -51,23 +51,49 @@ def get_cube_state(color_masks):
         'yellow': 'down'
     }
 
+    # Define the minimum number of pixels required to assign a color
+    min_pixels = 50
+
+    # Get the frame dimensions
+    height, width, _ = frame.shape
+
+    # Calculate the size and position of each cubie region
+    cubie_size = min(height, width) // 6
+    offset_x = (width - cubie_size * 3) // 2
+    offset_y = (height - cubie_size * 3) // 2
+
     # Iterate over each face and color
     for color, face in color_to_face.items():
         colors = cube_state[face]
         for i in range(9):
-            # Calculate the coordinates of the current cubie
+            # Calculate the coordinates of the current cubie region
             row = i // 3
             col = i % 3
-            x1, y1 = col * 50 + 10, row * 50 + 10
-            x2, y2 = col * 50 + 40, row * 50 + 40
+            x1 = offset_x + col * cubie_size
+            y1 = offset_y + row * cubie_size
+            x2 = x1 + cubie_size
+            y2 = y1 + cubie_size
 
-            # Count the number of pixels of each color within the cubie
+            # Draw the cubie region outline on the frame
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+            # Count the number of pixels of each color within the cubie region
             color_counts = {}
             for c, mask in color_masks.items():
                 color_counts[c] = np.count_nonzero(mask[y1:y2, x1:x2])
 
-            # Assign the color with the maximum count to the current cubie
-            colors[i] = max(color_counts, key=color_counts.get)
+            # Find the color with the maximum count
+            max_color = max(color_counts, key=color_counts.get)
+
+            # Assign the color only if it meets the minimum pixel count
+            if color_counts[max_color] >= min_pixels:
+                colors[i] = max_color
+            else:
+                colors[i] = 'unknown'
+
+            # Draw the cubie region outline with the face color
+            if face == color_to_face[color]:
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
     return cube_state
 
@@ -90,7 +116,13 @@ def main():
             # Detect color masks in the frame
             color_masks = detect_colors(frame)
 
-            # Display the original frame
+            # Get the current cube state and draw cubie regions on the frame
+            current_face_state = get_cube_state(color_masks, frame)
+
+            # Add the current face state to the cube state dictionary
+            cube_state[color] = current_face_state
+
+            # Display the original frame with cubie regions
             cv2.imshow('Rubik\'s Cube', frame)
 
             # Display the color mask for the current face
@@ -100,8 +132,6 @@ def main():
             # Wait for the user to press the space key
             key = cv2.waitKey(1) & 0xFF
             if key == ord(' '):
-                # Get the current cube state
-                cube_state = get_cube_state(color_masks)
                 break
 
             # Break the loop if 'q' is pressed
