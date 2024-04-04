@@ -3,7 +3,7 @@ import numpy as np
 
 # Define the color ranges for each face of the Rubik's Cube
 color_ranges = {
-    'red': [(170, 100, 100), (180, 255, 255)],
+    'red': [(0, 100, 100), (5, 255, 255)],
     'orange': [(5, 100, 100), (15, 255, 255)],
     'yellow': [(25, 100, 100), (35, 255, 255)],
     'green': [(45, 100, 100), (75, 255, 255)],
