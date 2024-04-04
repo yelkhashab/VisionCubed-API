@@ -30,6 +30,34 @@ def detect_colors(image):
 
     return color_masks
 
+def get_cube_state(color_masks):
+    # Define the reference cube state
+    cube_state = {
+        'up': ['white'] * 9,
+        'right': ['red'] * 9,
+        'front': ['green'] * 9,
+        'down': ['yellow'] * 9,
+        'left': ['orange'] * 9,
+        'back': ['blue'] * 9
+    }
+
+    # Iterate over each face and color
+    for face, colors in cube_state.items():
+        for i in range(9):
+            # Calculate the coordinates of the current cubie
+            row = i // 3
+            col = i % 3
+            x = col * 50 + 25
+            y = row * 50 + 25
+
+            # Check the color of the current cubie
+            for color, mask in color_masks.items():
+                if mask[y, x] == 255:
+                    colors[i] = color
+                    break
+
+    return cube_state
+
 def main():
     # Open the default camera
     cap = cv2.VideoCapture(0)
@@ -41,12 +69,15 @@ def main():
         # Detect color masks in the frame
         color_masks = detect_colors(frame)
 
+        # Get the current cube state
+        cube_state = get_cube_state(color_masks)
+
+        # Print the cube state
+        for face, colors in cube_state.items():
+            print(f"{face}: {colors}")
+
         # Display the original frame
         cv2.imshow('Rubik\'s Cube', frame)
-
-        # Display each color mask in a separate window
-        for color, mask in color_masks.items():
-            cv2.imshow(f'Mask - {color}', mask)
 
         # Break the loop if 'q' is pressed
         if cv2.waitKey(1) & 0xFF == ord('q'):
