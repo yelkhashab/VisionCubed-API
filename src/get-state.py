@@ -45,14 +45,14 @@ def update_state_for_move(self, move, modifier=""):
     
     # Handle double moves ('2') by applying the rotation twice
     if modifier == '2':
-        self.state = new_state  # Apply the first rotation
+        self.state = new_state
         new_state = rotate()  # Apply the second rotation
     
     return new_state
     
 def update_state_for_r_move(state, rotation):
     """
-    Correctly updates the cube state for an R move, with adjustments based on observed discrepancies.
+    Updates the cube state for an R move.
     """
     new_state = {face: stickers[:] for face, stickers in state.items()}
     
@@ -74,7 +74,7 @@ def update_state_for_l_move(state, rotation):
     """
     Updates the cube state for an L move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}  # Deep copy of the state
+    new_state = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
         new_state['L'] = rotate_face_clockwise(state['L'])
@@ -92,9 +92,9 @@ def update_state_for_l_move(state, rotation):
 
 def update_state_for_u_move(state, rotation):
     """
-    Correctly updates the cube state for a U move.
+    Updates the cube state for a U move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}  # Deep copy of the state
+    new_state = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
         new_state['U'] = rotate_face_clockwise(state['U'])
@@ -134,7 +134,7 @@ def update_state_for_f_move(state, rotation):
     """
     Updates the cube state for an F move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}  # Deep copy of the state
+    new_state = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
         new_state['F'] = rotate_face_clockwise(state['F'])
@@ -170,7 +170,6 @@ def update_state_for_b_move(state, rotation):
         new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['D'][6], state['D'][7], state['D'][8]
     return new_state
 
-# Updating the RubiksCube class to include corrected move implementations
 class RubiksCubeCorrected:
     def __init__(self, state=None):
         self.state = state or {
@@ -196,8 +195,8 @@ class RubiksCubeCorrected:
         return self.state
 
 # Testing the corrected implementation
-cube = RubiksCubeCorrected()
-cube.apply_moves(["F'", "R2", "U", "B", "L'", "D2"])
-state = cube.get_state()
-print(state)
+# cube = RubiksCubeCorrected()
+# cube.apply_moves(["F'", "R2", "U", "B", "L'", "D2"])
+# state = cube.get_state()
+# print(state)
 
