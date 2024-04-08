@@ -18,7 +18,7 @@ def update_state_for_move(self, move, modifier=""):
     - move: The move to be applied (e.g., 'R', 'L').
     - modifier: The modifier for the move ('', "'", '2').
     """
-    # Determine the rotation function based on the modifier
+
     if modifier == "'":
         rotation = 'ACW'
     else:
@@ -43,7 +43,6 @@ def update_state_for_move(self, move, modifier=""):
     # Apply the rotation
     new_state = rotate()
     
-    # Handle double moves ('2') by applying the rotation twice
     if modifier == '2':
         self.state = new_state
         new_state = rotate()  # Apply the second rotation
