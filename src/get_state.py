@@ -194,7 +194,7 @@ class RubiksCube:
         return self.state
 
 # Testing the implementation
-# cube = RubiksCube=()
+# cube = RubiksCube()
 # cube.apply_moves(["F'", "R2", "U", "B", "L'", "D2"])
 # state = cube.get_state()
 # print(state)
