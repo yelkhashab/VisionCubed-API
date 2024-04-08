@@ -4,6 +4,12 @@ def rotate_face_clockwise(face):
     """
     return [face[6], face[3], face[0], face[7], face[4], face[1], face[8], face[5], face[2]]
 
+def rotate_face_anticlockwise(face):
+    """
+    Rotates a face of the cube 90 degrees anticlockwise.
+    """
+    return [face[2], face[5], face[8], face[1], face[4], face[7], face[0], face[3], face[6]]
+
 def update_state_for_r_move(state):
     """
     Correctly updates the cube state for an R move, with adjustments based on observed discrepancies.
