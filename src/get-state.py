@@ -65,4 +65,8 @@ class RubiksCube:
     def get_state(self):
         return self.state
 
-
+# Testing the corrected implementation
+cube = RubiksCube()
+cube.apply_moves(['R', 'U', 'F', 'R', 'U'])
+corrected_state = cube.get_state()
+print(corrected_state)
