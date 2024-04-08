@@ -16,4 +16,13 @@ def update_state_for_r_move(state):
     new_state['B'][0], new_state['B'][3], new_state['B'][6] = state['U'][2], state['U'][5], state['U'][8]
     return new_state
 
+def update_state_for_u_move(state):
+    """
+    Updates the cube state for a U move.
+    """
+    new_state = {face: stickers[:] for face, stickers in state.items()}  # Deep copy of the state
+    new_state['U'] = rotate_face_clockwise(state['U'])
+    new_state['F'][:3], new_state['R'][:3], new_state['B'][:3], new_state['L'][:3] = state['R'][:3], state['B'][:3], state['L'][:3], state['F'][:3]
+    return new_state
+
 
