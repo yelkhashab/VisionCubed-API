@@ -37,4 +37,32 @@ def update_state_for_f_move(state):
     new_state['R'][0], new_state['R'][3], new_state['R'][6] = state['U'][6], state['U'][7], state['U'][8]
     return new_state
 
+# Updating the RubiksCube class to include corrected move implementations
+class RubiksCube:
+    def __init__(self, state=None):
+        self.state = state or {
+            'F': ['R']*9,
+            'B': ['O']*9,
+            'U': ['W']*9,
+            'D': ['Y']*9,
+            'L': ['G']*9,
+            'R': ['B']*9,
+        }
+    
+    def apply_move(self, move):
+        if move == 'R':
+            self.state = update_state_for_r_move(self.state)
+        elif move == 'U':
+            self.state = update_state_for_u_move(self.state)
+        elif move == 'F':
+            self.state = update_state_for_f_move(self.state)
+        # Add other moves as needed
+    
+    def apply_moves(self, moves):
+        for move in moves:
+            self.apply_move(move)
+
+    def get_state(self):
+        return self.state
+
 
