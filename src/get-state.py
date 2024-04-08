@@ -169,7 +169,7 @@ def update_state_for_b_move(state, rotation):
         new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['D'][6], state['D'][7], state['D'][8]
     return new_state
 
-class RubiksCubeCorrected:
+class RubiksCube:
     def __init__(self, state=None):
         self.state = state or {
             'F': ['R']*9,
@@ -193,8 +193,8 @@ class RubiksCubeCorrected:
     def get_state(self):
         return self.state
 
-# Testing the corrected implementation
-# cube = RubiksCubeCorrected()
+# Testing the implementation
+# cube = RubiksCube=()
 # cube.apply_moves(["F'", "R2", "U", "B", "L'", "D2"])
 # state = cube.get_state()
 # print(state)
