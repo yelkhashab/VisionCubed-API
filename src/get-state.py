@@ -71,7 +71,7 @@ def update_state_for_b_move(state):
     new_state = {face: stickers[:] for face, stickers in state.items()}
     new_state['B'] = rotate_face_clockwise(state['B'])
     new_state['U'][0], new_state['U'][1], new_state['U'][2] = state['R'][2], state['R'][5], state['R'][8]
-    new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['U'][0], state['U'][1], state['U'][2]
+    new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['U'][2], state['U'][1], state['U'][0]
     new_state['D'][6], new_state['D'][7], new_state['D'][8] = state['L'][0], state['L'][3], state['L'][6]
     new_state['R'][2], new_state['R'][5], new_state['R'][8] = state['D'][8], state['D'][7], state['D'][6]
     return new_state
