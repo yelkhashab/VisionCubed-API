@@ -42,10 +42,11 @@ def update_state_for_move(self, move, modifier=""):
 
     # Apply the rotation
     new_state = rotate()
+    self.state = new_state
     
     if modifier == '2':
-        self.state = new_state
         new_state = rotate()  # Apply the second rotation
+        self.state = new_state
     
     return new_state
     
@@ -125,7 +126,7 @@ def update_state_for_d_move(state, rotation):
         new_state['D'] = rotate_face_anticlockwise(state['D'])
         new_state['F'][6], new_state['F'][7], new_state['F'][8] = state['R'][6], state['R'][7], state['R'][8]
         new_state['R'][6], new_state['R'][7], new_state['R'][8] = state['B'][6], state['B'][7], state['B'][8]
-        new_state['B'][6], new_state['B'][7], state['B'][8] = state['L'][6], state['L'][7], state['L'][8]
+        new_state['B'][6], new_state['B'][7], new_state['B'][8] = state['L'][6], state['L'][7], state['L'][8]
         new_state['L'][6], new_state['L'][7], new_state['L'][8] = state['F'][6], state['F'][7], state['F'][8]
     return new_state
 
@@ -145,7 +146,7 @@ def update_state_for_f_move(state, rotation):
         new_state['F'] = rotate_face_anticlockwise(state['F'])
         new_state['U'][6], new_state['U'][7], new_state['U'][8] = state['R'][0], state['R'][3], state['R'][6]
         new_state['R'][0], new_state['R'][3], new_state['R'][6] = state['D'][0], state['D'][1], state['D'][2]
-        new_state['D'][0], new_state['D'][1], new_state['D'][2] = state['L'][8], state['L'][5], state['L'][2]
+        new_state['D'][0], new_state['D'][1], new_state['D'][2] = state['L'][2], state['L'][5], state['L'][8]
         new_state['L'][2], new_state['L'][5], new_state['L'][8] = state['U'][6], state['U'][7], state['U'][8]
     return new_state
 
@@ -165,7 +166,7 @@ def update_state_for_b_move(state, rotation):
         new_state['B'] = rotate_face_anticlockwise(state['B'])
         new_state['U'][0], new_state['U'][1], new_state['U'][2] = state['L'][6], state['L'][3], state['L'][0]
         new_state['R'][2], new_state['R'][5], new_state['R'][8] = state['U'][0], state['U'][1], state['U'][2]
-        new_state['D'][6], new_state['D'][7], new_state['D'][8] = state['R'][2], state['R'][5], state['R'][8]
+        new_state['D'][6], new_state['D'][7], new_state['D'][8] = state['R'][8], state['R'][5], state['R'][2]
         new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['D'][6], state['D'][7], state['D'][8]
     return new_state
 
@@ -195,7 +196,7 @@ class RubiksCube:
 
 # Testing the implementation
 # cube = RubiksCube()
-# cube.apply_moves(["F'", "R2", "U", "B", "L'", "D2"])
+# cube.apply_moves(["U'", 'B2', "F'", 'R', 'B', 'D2', 'R2', 'U', "D'", 'U', 'R', 'B', 'F2', "B'", "U'", 'B', 'R', 'U2', 'R', "B'"])
 # state = cube.get_state()
 # print(state)
 
