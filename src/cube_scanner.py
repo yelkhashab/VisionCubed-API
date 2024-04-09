@@ -3,12 +3,32 @@ import numpy as np
 
 # Define the color ranges for each face of the Rubik's Cube
 color_ranges = {
-    'red': [(0, 100, 100), (5, 255, 255)],
-    'orange': [(5, 100, 100), (15, 255, 255)],
-    'yellow': [(25, 100, 100), (35, 255, 255)],
-    'green': [(45, 100, 100), (75, 255, 255)],
-    'blue': [(100, 100, 100), (130, 255, 255)],
-    'white': [(100, 0, 100), (180, 50, 255)]
+    'R': [(170, 100, 100), (179, 255, 255)],
+    'O': [(7, 100, 100), (15, 255, 255)],
+    'Y': [(25, 100, 100), (35, 255, 255)],
+    'G': [(45, 100, 100), (75, 255, 255)],
+    'B': [(100, 100, 100), (130, 255, 255)],
+    'W': [(100, 0, 100), (180, 50, 255)]
+}
+
+# Define the mapping of center colors to face names
+color_to_face = {
+    'R': 'F',
+    'B': 'R',
+    'O': 'B',
+    'G': 'L',
+    'W': 'U',
+    'Y': 'D'
+}
+
+# Define the mapping of face names to center colors
+face_to_color = {
+    'F': 'R',
+    'R': 'B',
+    'B': 'O',
+    'L': 'G',
+    'U': 'W',
+    'D': 'Y'
 }
 
 def detect_colors(image):
@@ -33,22 +53,12 @@ def detect_colors(image):
 def get_cube_state(color_masks, frame):
     # Define the reference cube state
     cube_state = {
-        'up': ['white'] * 9,
-        'right': ['red'] * 9,
-        'front': ['green'] * 9,
-        'down': ['yellow'] * 9,
-        'left': ['orange'] * 9,
-        'back': ['blue'] * 9
-    }
-
-    # Define the mapping of center colors to face names
-    color_to_face = {
-        'green': 'front',
-        'red': 'right',
-        'blue': 'back',
-        'orange': 'left',
-        'white': 'up',
-        'yellow': 'down'
+        'U': ['W'] * 9,
+        'R': ['B'] * 9,
+        'F': ['R'] * 9,
+        'D': ['Y'] * 9,
+        'L': ['G'] * 9,
+        'B': ['O'] * 9
     }
 
     # Define the minimum number of pixels required to assign a color
@@ -105,10 +115,10 @@ def main():
     cube_state = {}
 
     # Define the face order for scanning
-    face_order = ['green', 'red', 'blue', 'orange', 'white', 'yellow']
+    face_order = ['F', 'R', 'B', 'L', 'U', 'D']
 
     # Iterate over each face
-    for color in face_order:
+    for face in face_order:
         while True:
             # Read a frame from the camera
             ret, frame = cap.read()
@@ -120,14 +130,14 @@ def main():
             current_face_state = get_cube_state(color_masks, frame)
 
             # Add the current face state to the cube state dictionary
-            cube_state[color] = current_face_state
+            cube_state[face] = current_face_state[face]
 
             # Display the original frame with cubie regions
             cv2.imshow('Rubik\'s Cube', frame)
 
             # Display the color mask for the current face
-            mask = color_masks[color]
-            cv2.imshow(f'Mask - {color}', mask)
+            mask = color_masks[face_to_color[face]]
+            cv2.imshow(f'Mask - {face}', mask)
 
             # Wait for the user to press the space key
             key = cv2.waitKey(1) & 0xFF
@@ -137,13 +147,18 @@ def main():
             # Break the loop if 'q' is pressed
             if key == ord('q'):
                 break
-
+            
+        # Break the loop if 'q' is pressed
+        if key == ord('q'):
+            break
+        
         # Close the mask window for the current face
-        cv2.destroyWindow(f'Mask - {color}')
+        cv2.destroyWindow(f'Mask - {face}')
 
     # Print the final cube state
-    for face, colors in cube_state.items():
-        print(f"{face}: {colors}")
+    print(cube_state)
+    # for face, colors in cube_state.items():
+    #     print(f"{face}: {colors}")
 
     # Release the camera and close the windows
     cap.release()
