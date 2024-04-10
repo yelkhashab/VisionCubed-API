@@ -157,8 +157,6 @@ def main():
 
     # Print the final cube state
     print(cube_state)
-    # for face, colors in cube_state.items():
-    #     print(f"{face}: {colors}")
 
     # Release the camera and close the windows
     cap.release()
