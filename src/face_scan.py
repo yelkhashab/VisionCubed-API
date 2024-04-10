@@ -1,6 +1,7 @@
 import cv2
 import os
 import numpy as np
+import base64
 
 # Define the color ranges for each face of the Rubik's Cube
 color_ranges = {
@@ -117,12 +118,13 @@ def process_face_image(image):
 
     return face_state
 
-def scan(image_path):
-    # Read the image from the provided path
-    image = cv2.imread(image_path)
+def scan(base64_image):
+    # Decode the base64 image
+    encoded_image = base64.b64decode(base64_image)
+    decoded_image = cv2.imdecode(np.frombuffer(encoded_image, np.uint8), cv2.IMREAD_COLOR)
 
     # Process the face image and get its state
-    face_state = process_face_image(image)
+    face_state = process_face_image(decoded_image)
 
     # Find the face name based on the center color
     center_color = face_state['F'][4]  # Assuming the center cubie is at index 4
@@ -134,10 +136,11 @@ def scan(image_path):
     return result
 
 # Example usage
-if __name__ == '__main__':
-    image_path = 'test/assets/Yellow_1.jpg'  # Replace with the actual path to your image
-    if os.path.isfile(image_path):
-        face_state = scan(image_path)
-        print(face_state)
-    else:
-        print(f"No file found at {image_path}")
+# if __name__ == '__main__':
+#     # Simulating a base64 encoded image (replace with your actual base64 encoded image)
+#     image_path = 'test/assets/White_1.jpg'
+#     with open(image_path, 'rb') as image_file:
+#         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+#     face_state = scan(base64_image)
+#     print(face_state)
