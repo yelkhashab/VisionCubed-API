@@ -10,9 +10,10 @@ from src.solve import solve
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
 
-@app.route('/scan', methods=['POST'])
+@app.route('/api/scan', methods=['POST'])
 def scan_image():
-    image = request.files['image']  # Get the image file from the request
+    image = request.get_json()  # Get the image data from the request
+    # image = decode_image(image_data)  # Decode the image data
     result = scan(image)  # Call the scan function with the image
     if 'unknown' in result:
         return jsonify({'error': 'Error scanning'}), 400  # Return 400 error code if result contains 'unknown'
