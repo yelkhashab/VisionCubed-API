@@ -1,4 +1,5 @@
 import cv2
+import os
 import numpy as np
 
 # Define the color ranges for each face of the Rubik's Cube
@@ -116,7 +117,7 @@ def process_face_image(image):
 
     return face_state
 
-def main(image_path):
+def scan(image_path):
     # Read the image from the provided path
     image = cv2.imread(image_path)
 
@@ -134,6 +135,9 @@ def main(image_path):
 
 # Example usage
 if __name__ == '__main__':
-    image_path = '../test/assets/Red_1.jpg'  # Replace with the actual path to your image
-    face_state = main(image_path)
-    print(face_state)
+    image_path = 'test/assets/Yellow_1.jpg'  # Replace with the actual path to your image
+    if os.path.isfile(image_path):
+        face_state = scan(image_path)
+        print(face_state)
+    else:
+        print(f"No file found at {image_path}")
