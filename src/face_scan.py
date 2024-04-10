@@ -1,5 +1,7 @@
 import cv2
+import os
 import numpy as np
+import base64
 
 # Define the color ranges for each face of the Rubik's Cube
 color_ranges = {
@@ -107,60 +109,38 @@ def get_cube_state(color_masks, frame):
 
     return cube_state
 
-def main():
-    # Open the default camera
-    cap = cv2.VideoCapture(0)
+def process_face_image(image):
+    # Detect color masks in the image
+    color_masks = detect_colors(image)
 
-    # Initialize an empty dictionary to store the cube state
-    cube_state = {}
+    # Get the current cube state and draw cubie regions on the image
+    face_state = get_cube_state(color_masks, image)
 
-    # Define the face order for scanning
-    face_order = ['F', 'R', 'B', 'L', 'U', 'D']
+    return face_state
 
-    # Iterate over each face
-    for face in face_order:
-        while True:
-            # Read a frame from the camera
-            ret, frame = cap.read()
+def scan(base64_image):
+    # Decode the base64 image
+    encoded_image = base64.b64decode(base64_image)
+    decoded_image = cv2.imdecode(np.frombuffer(encoded_image, np.uint8), cv2.IMREAD_COLOR)
 
-            # Detect color masks in the frame
-            color_masks = detect_colors(frame)
+    # Process the face image and get its state
+    face_state = process_face_image(decoded_image)
 
-            # Get the current cube state and draw cubie regions on the frame
-            current_face_state = get_cube_state(color_masks, frame)
+    # Find the face name based on the center color
+    center_color = face_state['F'][4]  # Assuming the center cubie is at index 4
+    face_name = color_to_face[center_color]
 
-            # Add the current face state to the cube state dictionary
-            cube_state[face] = current_face_state[face]
+    # Create a dictionary to store the face state
+    result = {face_name: face_state[face_name]}
 
-            # Display the original frame with cubie regions
-            cv2.imshow('Rubik\'s Cube', frame)
+    return result
 
-            # Display the color mask for the current face
-            mask = color_masks[face_to_color[face]]
-            cv2.imshow(f'Mask - {face}', mask)
+# Example usage
+# if __name__ == '__main__':
+#     # Simulating a base64 encoded image (replace with your actual base64 encoded image)
+#     image_path = 'test/assets/White_1.jpg'
+#     with open(image_path, 'rb') as image_file:
+#         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
 
-            # Wait for the user to press the space key
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord(' '):
-                break
-
-            # Break the loop if 'q' is pressed
-            if key == ord('q'):
-                break
-            
-        # Break the loop if 'q' is pressed
-        if key == ord('q'):
-            break
-        
-        # Close the mask window for the current face
-        cv2.destroyWindow(f'Mask - {face}')
-
-    # Print the final cube state
-    print(cube_state)
-
-    # Release the camera and close the windows
-    cap.release()
-    cv2.destroyAllWindows()
-
-if __name__ == '__main__':
-    main()
+#     face_state = scan(base64_image)
+#     print(face_state)
