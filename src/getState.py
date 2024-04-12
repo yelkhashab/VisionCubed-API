@@ -1,16 +1,16 @@
-def rotate_face_clockwise(face):
+def rotateFaceClockwise(face):
     """
     Rotates a face of the cube 90 degrees clockwise.
     """
     return [face[6], face[3], face[0], face[7], face[4], face[1], face[8], face[5], face[2]]
 
-def rotate_face_anticlockwise(face):
+def rotateFaceAnticlockwise(face):
     """
     Rotates a face of the cube 90 degrees anticlockwise.
     """
     return [face[2], face[5], face[8], face[1], face[4], face[7], face[0], face[3], face[6]]
 
-def update_state_for_move(self, move, modifier=""):
+def updateStateForMove(self, move, modifier=""):
     """
     Update the cube state for a given move, applying clockwise or anticlockwise rotations as needed.
     
@@ -26,149 +26,149 @@ def update_state_for_move(self, move, modifier=""):
 
     def rotate():
         if move == 'R':
-            new_state = update_state_for_r_move(self.state, rotation)
+            newState = updateStateForRMove(self.state, rotation)
         elif move == 'L':
-            new_state = update_state_for_l_move(self.state, rotation)
+            newState = updateStateForLMove(self.state, rotation)
         elif move == 'U':
-            new_state = update_state_for_u_move(self.state, rotation)
+            newState = updateStateForUMove(self.state, rotation)
         elif move == 'D':
-            new_state = update_state_for_d_move(self.state, rotation)
+            newState = updateStateForDMove(self.state, rotation)
         elif move == 'F':
-            new_state = update_state_for_f_move(self.state, rotation)
+            newState = updateStateForFMove(self.state, rotation)
         elif move == 'B':
-            new_state = update_state_for_b_move(self.state, rotation)
+            newState = updateStateForBMove(self.state, rotation)
         
-        return new_state
+        return newState
 
     # Apply the rotation
-    new_state = rotate()
-    self.state = new_state
+    newState = rotate()
+    self.state = newState
     
     if modifier == '2':
-        new_state = rotate()  # Apply the second rotation
-        self.state = new_state
+        newState = rotate()  # Apply the second rotation
+        self.state = newState
     
-    return new_state
+    return newState
     
-def update_state_for_r_move(state, rotation):
+def updateStateForRMove(state, rotation):
     """
     Updates the cube state for an R move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['R'] = rotate_face_clockwise(state['R'])
-        new_state['U'][2], new_state['U'][5], new_state['U'][8] = state['F'][2], state['F'][5], state['F'][8]
-        new_state['F'][2], new_state['F'][5], new_state['F'][8] = state['D'][2], state['D'][5], state['D'][8]
-        new_state['D'][2], new_state['D'][5], new_state['D'][8] = state['B'][6], state['B'][3], state['B'][0]
-        new_state['B'][6], new_state['B'][3], new_state['B'][0] = state['U'][2], state['U'][5], state['U'][8]
+        newState['R'] = rotateFaceClockwise(state['R'])
+        newState['U'][2], newState['U'][5], newState['U'][8] = state['F'][2], state['F'][5], state['F'][8]
+        newState['F'][2], newState['F'][5], newState['F'][8] = state['D'][2], state['D'][5], state['D'][8]
+        newState['D'][2], newState['D'][5], newState['D'][8] = state['B'][6], state['B'][3], state['B'][0]
+        newState['B'][6], newState['B'][3], newState['B'][0] = state['U'][2], state['U'][5], state['U'][8]
     elif rotation == 'ACW':
-        new_state['R'] = rotate_face_anticlockwise(state['R'])
-        new_state['U'][2], new_state['U'][5], new_state['U'][8] = state['B'][6], state['B'][3], state['B'][0]
-        new_state['B'][6], new_state['B'][3], new_state['B'][0] = state['D'][2], state['D'][5], state['D'][8]
-        new_state['D'][2], new_state['D'][5], new_state['D'][8] = state['F'][2], state['F'][5], state['F'][8]
-        new_state['F'][2], new_state['F'][5], new_state['F'][8] = state['U'][2], state['U'][5], state['U'][8]
-    return new_state
+        newState['R'] = rotateFaceAnticlockwise(state['R'])
+        newState['U'][2], newState['U'][5], newState['U'][8] = state['B'][6], state['B'][3], state['B'][0]
+        newState['B'][6], newState['B'][3], newState['B'][0] = state['D'][2], state['D'][5], state['D'][8]
+        newState['D'][2], newState['D'][5], newState['D'][8] = state['F'][2], state['F'][5], state['F'][8]
+        newState['F'][2], newState['F'][5], newState['F'][8] = state['U'][2], state['U'][5], state['U'][8]
+    return newState
 
-def update_state_for_l_move(state, rotation):
+def updateStateForLMove(state, rotation):
     """
     Updates the cube state for an L move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['L'] = rotate_face_clockwise(state['L'])
-        new_state['U'][0], new_state['U'][3], new_state['U'][6] = state['B'][8], state['B'][5], state['B'][2]
-        new_state['F'][0], new_state['F'][3], new_state['F'][6] = state['U'][0], state['U'][3], state['U'][6]
-        new_state['D'][0], new_state['D'][3], new_state['D'][6] = state['F'][0], state['F'][3], state['F'][6]
-        new_state['B'][2], new_state['B'][5], new_state['B'][8] = state['D'][6], state['D'][3], state['D'][0]
+        newState['L'] = rotateFaceClockwise(state['L'])
+        newState['U'][0], newState['U'][3], newState['U'][6] = state['B'][8], state['B'][5], state['B'][2]
+        newState['F'][0], newState['F'][3], newState['F'][6] = state['U'][0], state['U'][3], state['U'][6]
+        newState['D'][0], newState['D'][3], newState['D'][6] = state['F'][0], state['F'][3], state['F'][6]
+        newState['B'][2], newState['B'][5], newState['B'][8] = state['D'][6], state['D'][3], state['D'][0]
     elif rotation == 'ACW':
-        new_state['L'] = rotate_face_anticlockwise(state['L'])
-        new_state['U'][0], new_state['U'][3], new_state['U'][6] = state['F'][0], state['F'][3], state['F'][6]
-        new_state['F'][0], new_state['F'][3], new_state['F'][6] = state['D'][0], state['D'][3], state['D'][6]
-        new_state['D'][0], new_state['D'][3], new_state['D'][6] = state['B'][8], state['B'][5], state['B'][2]
-        new_state['B'][8], new_state['B'][5], new_state['B'][2] = state['U'][0], state['U'][3], state['U'][6]
-    return new_state
+        newState['L'] = rotateFaceAnticlockwise(state['L'])
+        newState['U'][0], newState['U'][3], newState['U'][6] = state['F'][0], state['F'][3], state['F'][6]
+        newState['F'][0], newState['F'][3], newState['F'][6] = state['D'][0], state['D'][3], state['D'][6]
+        newState['D'][0], newState['D'][3], newState['D'][6] = state['B'][8], state['B'][5], state['B'][2]
+        newState['B'][8], newState['B'][5], newState['B'][2] = state['U'][0], state['U'][3], state['U'][6]
+    return newState
 
-def update_state_for_u_move(state, rotation):
+def updateStateForUMove(state, rotation):
     """
     Updates the cube state for a U move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['U'] = rotate_face_clockwise(state['U'])
-        new_state['F'][0], new_state['F'][1], new_state['F'][2] = state['R'][0], state['R'][1], state['R'][2]
-        new_state['R'][0], new_state['R'][1], new_state['R'][2] = state['B'][0], state['B'][1], state['B'][2]
-        new_state['B'][0], new_state['B'][1], new_state['B'][2] = state['L'][0], state['L'][1], state['L'][2]
-        new_state['L'][0], new_state['L'][1], new_state['L'][2] = state['F'][0], state['F'][1], state['F'][2]
+        newState['U'] = rotateFaceClockwise(state['U'])
+        newState['F'][0], newState['F'][1], newState['F'][2] = state['R'][0], state['R'][1], state['R'][2]
+        newState['R'][0], newState['R'][1], newState['R'][2] = state['B'][0], state['B'][1], state['B'][2]
+        newState['B'][0], newState['B'][1], newState['B'][2] = state['L'][0], state['L'][1], state['L'][2]
+        newState['L'][0], newState['L'][1], newState['L'][2] = state['F'][0], state['F'][1], state['F'][2]
     elif rotation == 'ACW':
-        new_state['U'] = rotate_face_anticlockwise(state['U'])
-        new_state['F'][0], new_state['F'][1], new_state['F'][2] = state['L'][0], state['L'][1], state['L'][2]
-        new_state['R'][0], new_state['R'][1], new_state['R'][2] = state['F'][0], state['F'][1], state['F'][2]
-        new_state['B'][0], new_state['B'][1], new_state['B'][2] = state['R'][0], state['R'][1], state['R'][2]
-        new_state['L'][0], new_state['L'][1], new_state['L'][2] = state['B'][0], state['B'][1], state['B'][2] 
-    return new_state
+        newState['U'] = rotateFaceAnticlockwise(state['U'])
+        newState['F'][0], newState['F'][1], newState['F'][2] = state['L'][0], state['L'][1], state['L'][2]
+        newState['R'][0], newState['R'][1], newState['R'][2] = state['F'][0], state['F'][1], state['F'][2]
+        newState['B'][0], newState['B'][1], newState['B'][2] = state['R'][0], state['R'][1], state['R'][2]
+        newState['L'][0], newState['L'][1], newState['L'][2] = state['B'][0], state['B'][1], state['B'][2] 
+    return newState
 
-def update_state_for_d_move(state, rotation):
+def updateStateForDMove(state, rotation):
     """
     Updates the cube state for a D move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['D'] = rotate_face_clockwise(state['D'])
-        new_state['F'][6], new_state['F'][7], new_state['F'][8] = state['L'][6], state['L'][7], state['L'][8]
-        new_state['R'][6], new_state['R'][7], new_state['R'][8] = state['F'][6], state['F'][7], state['F'][8]
-        new_state['B'][6], new_state['B'][7], new_state['B'][8] = state['R'][6], state['R'][7], state['R'][8]
-        new_state['L'][6], new_state['L'][7], new_state['L'][8] = state['B'][6], state['B'][7], state['B'][8]
+        newState['D'] = rotateFaceClockwise(state['D'])
+        newState['F'][6], newState['F'][7], newState['F'][8] = state['L'][6], state['L'][7], state['L'][8]
+        newState['R'][6], newState['R'][7], newState['R'][8] = state['F'][6], state['F'][7], state['F'][8]
+        newState['B'][6], newState['B'][7], newState['B'][8] = state['R'][6], state['R'][7], state['R'][8]
+        newState['L'][6], newState['L'][7], newState['L'][8] = state['B'][6], state['B'][7], state['B'][8]
     elif rotation == 'ACW':
-        new_state['D'] = rotate_face_anticlockwise(state['D'])
-        new_state['F'][6], new_state['F'][7], new_state['F'][8] = state['R'][6], state['R'][7], state['R'][8]
-        new_state['R'][6], new_state['R'][7], new_state['R'][8] = state['B'][6], state['B'][7], state['B'][8]
-        new_state['B'][6], new_state['B'][7], new_state['B'][8] = state['L'][6], state['L'][7], state['L'][8]
-        new_state['L'][6], new_state['L'][7], new_state['L'][8] = state['F'][6], state['F'][7], state['F'][8]
-    return new_state
+        newState['D'] = rotateFaceAnticlockwise(state['D'])
+        newState['F'][6], newState['F'][7], newState['F'][8] = state['R'][6], state['R'][7], state['R'][8]
+        newState['R'][6], newState['R'][7], newState['R'][8] = state['B'][6], state['B'][7], state['B'][8]
+        newState['B'][6], newState['B'][7], newState['B'][8] = state['L'][6], state['L'][7], state['L'][8]
+        newState['L'][6], newState['L'][7], newState['L'][8] = state['F'][6], state['F'][7], state['F'][8]
+    return newState
 
-def update_state_for_f_move(state, rotation):
+def updateStateForFMove(state, rotation):
     """
     Updates the cube state for an F move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['F'] = rotate_face_clockwise(state['F'])
-        new_state['U'][6], new_state['U'][7], new_state['U'][8] = state['L'][8], state['L'][5], state['L'][2]
-        new_state['L'][2], new_state['L'][5], new_state['L'][8] = state['D'][0], state['D'][1], state['D'][2]
-        new_state['D'][0], new_state['D'][1], new_state['D'][2] = state['R'][6], state['R'][3], state['R'][0]
-        new_state['R'][0], new_state['R'][3], new_state['R'][6] = state['U'][6], state['U'][7], state['U'][8]
+        newState['F'] = rotateFaceClockwise(state['F'])
+        newState['U'][6], newState['U'][7], newState['U'][8] = state['L'][8], state['L'][5], state['L'][2]
+        newState['L'][2], newState['L'][5], newState['L'][8] = state['D'][0], state['D'][1], state['D'][2]
+        newState['D'][0], newState['D'][1], newState['D'][2] = state['R'][6], state['R'][3], state['R'][0]
+        newState['R'][0], newState['R'][3], newState['R'][6] = state['U'][6], state['U'][7], state['U'][8]
     elif rotation == 'ACW':
-        new_state['F'] = rotate_face_anticlockwise(state['F'])
-        new_state['U'][6], new_state['U'][7], new_state['U'][8] = state['R'][0], state['R'][3], state['R'][6]
-        new_state['R'][0], new_state['R'][3], new_state['R'][6] = state['D'][0], state['D'][1], state['D'][2]
-        new_state['D'][0], new_state['D'][1], new_state['D'][2] = state['L'][2], state['L'][5], state['L'][8]
-        new_state['L'][2], new_state['L'][5], new_state['L'][8] = state['U'][6], state['U'][7], state['U'][8]
-    return new_state
+        newState['F'] = rotateFaceAnticlockwise(state['F'])
+        newState['U'][6], newState['U'][7], newState['U'][8] = state['R'][0], state['R'][3], state['R'][6]
+        newState['R'][0], newState['R'][3], newState['R'][6] = state['D'][0], state['D'][1], state['D'][2]
+        newState['D'][0], newState['D'][1], newState['D'][2] = state['L'][2], state['L'][5], state['L'][8]
+        newState['L'][2], newState['L'][5], newState['L'][8] = state['U'][6], state['U'][7], state['U'][8]
+    return newState
 
-def update_state_for_b_move(state, rotation):
+def updateStateForBMove(state, rotation):
     """
     Updates the cube state for a B move.
     """
-    new_state = {face: stickers[:] for face, stickers in state.items()}
+    newState = {face: stickers[:] for face, stickers in state.items()}
     
     if rotation == 'CW':
-        new_state['B'] = rotate_face_clockwise(state['B'])
-        new_state['U'][0], new_state['U'][1], new_state['U'][2] = state['R'][2], state['R'][5], state['R'][8]
-        new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['U'][2], state['U'][1], state['U'][0]
-        new_state['D'][6], new_state['D'][7], new_state['D'][8] = state['L'][0], state['L'][3], state['L'][6]
-        new_state['R'][2], new_state['R'][5], new_state['R'][8] = state['D'][8], state['D'][7], state['D'][6]
+        newState['B'] = rotateFaceClockwise(state['B'])
+        newState['U'][0], newState['U'][1], newState['U'][2] = state['R'][2], state['R'][5], state['R'][8]
+        newState['L'][0], newState['L'][3], newState['L'][6] = state['U'][2], state['U'][1], state['U'][0]
+        newState['D'][6], newState['D'][7], newState['D'][8] = state['L'][0], state['L'][3], state['L'][6]
+        newState['R'][2], newState['R'][5], newState['R'][8] = state['D'][8], state['D'][7], state['D'][6]
     elif rotation == 'ACW':
-        new_state['B'] = rotate_face_anticlockwise(state['B'])
-        new_state['U'][0], new_state['U'][1], new_state['U'][2] = state['L'][6], state['L'][3], state['L'][0]
-        new_state['R'][2], new_state['R'][5], new_state['R'][8] = state['U'][0], state['U'][1], state['U'][2]
-        new_state['D'][6], new_state['D'][7], new_state['D'][8] = state['R'][8], state['R'][5], state['R'][2]
-        new_state['L'][0], new_state['L'][3], new_state['L'][6] = state['D'][6], state['D'][7], state['D'][8]
-    return new_state
+        newState['B'] = rotateFaceAnticlockwise(state['B'])
+        newState['U'][0], newState['U'][1], newState['U'][2] = state['L'][6], state['L'][3], state['L'][0]
+        newState['R'][2], newState['R'][5], newState['R'][8] = state['U'][0], state['U'][1], state['U'][2]
+        newState['D'][6], newState['D'][7], newState['D'][8] = state['R'][8], state['R'][5], state['R'][2]
+        newState['L'][0], newState['L'][3], newState['L'][6] = state['D'][6], state['D'][7], state['D'][8]
+    return newState
 
 class RubiksCube:
     def __init__(self, state=None):
@@ -181,22 +181,21 @@ class RubiksCube:
             'R': ['B']*9,
         }
     
-    def apply_move(self, move):
-        move_type = move[0]  # Extract the move (e.g., 'R' from 'R' or 'R2')
+    def applyMove(self, move):
+        moveType = move[0]  # Extract the move (e.g., 'R' from 'R' or 'R2')
         modifier = move[1:]  # Extract the modifier (e.g., "'" or '2')
 
-        self.state = update_state_for_move(self, move_type, modifier)
+        self.state = updateStateForMove(self, moveType, modifier)
 
-    def apply_moves(self, moves):
+    def applyMoves(self, moves):
         for move in moves:
-            self.apply_move(move)
+            self.applyMove(move)
 
-    def get_state(self):
+    def getState(self):
         return self.state
 
 # Testing the implementation
 # cube = RubiksCube()
-# cube.apply_moves(["U'", 'B2', "F'", 'R', 'B', 'D2', 'R2', 'U', "D'", 'U', 'R', 'B', 'F2', "B'", "U'", 'B', 'R', 'U2', 'R', "B'"])
-# state = cube.get_state()
+# cube.applyMoves(["U'", 'B2', "F'", 'R', 'B', 'D2', 'R2', 'U', "D'", 'U', 'R', 'B', 'F2', "B'", "U'", 'B', 'R', 'U2', 'R', "B'"])
+# state = cube.getState()
 # print(state)
-
