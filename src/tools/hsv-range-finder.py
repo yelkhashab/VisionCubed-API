@@ -4,23 +4,23 @@ from tkinter import Tk, Button, Label
 from PIL import Image, ImageTk, ImageGrab
 
 # Callback function for mouse events
-def get_hsv_range(event, x, y, flags, param):
+def getHsvRange(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         pixel = frame[y,x]
-        pixel_bgr = frame[y,x].reshape((1, 1, 3))
-        hsv_image = cv2.cvtColor(pixel_bgr, cv2.COLOR_BGR2HSV)
-        lower_bound = np.array([max(hsv_image[0][0][0] - threshold, 0), 50, 50])
-        upper_bound = np.array([min(hsv_image[0][0][0] + threshold, 179), 255, 255])
+        pixelBgr = frame[y,x].reshape((1, 1, 3))
+        hsvImage = cv2.cvtColor(pixelBgr, cv2.COLOR_BGR2HSV)
+        lowerBound = np.array([max(hsvImage[0][0][0] - threshold, 0), 50, 50])
+        upperBound = np.array([min(hsvImage[0][0][0] + threshold, 179), 255, 255])
 
         # Set a label in the GUI to display the HSV range
-        hsv_range_label.config(text=f"HSV Range: {lower_bound}, {upper_bound}")
+        hsvRangeLabel.config(text=f"HSV Range: {lowerBound}, {upperBound}")
 
 # Function to start video capture and select color
-def select_color():
+def selectColor():
     global frame
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Frame')
-    cv2.setMouseCallback('Frame', get_hsv_range)
+    cv2.setMouseCallback('Frame', getHsvRange)
 
     while True:
         ret, frame = cap.read()
@@ -42,11 +42,11 @@ root.title("Color Picker")
 frame = None
 threshold = 40
 
-select_btn = Button(root, text="Select Color", command=select_color)
-select_btn.pack()
+selectBtn = Button(root, text="Select Color", command=selectColor)
+selectBtn.pack()
 
-hsv_range_label = Label(root, text="HSV Range:")
-hsv_range_label.pack()
+hsvRangeLabel = Label(root, text="HSV Range:")
+hsvRangeLabel.pack()
 
 # Run the GUI
 root.mainloop()
