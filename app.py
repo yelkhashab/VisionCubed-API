@@ -2,9 +2,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 # Assuming these modules are correctly set up
-from src.relative_face_scan import scan
-from src.get_state import RubiksCube
-from src.scrambler import generate_scramble
+from src.cubeScanner import scan
+from src.getState import RubiksCube
+from src.scrambler import generateScramble
 from src.solve import solve
 
 app = Flask(__name__)
