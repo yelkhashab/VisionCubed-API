@@ -28,5 +28,5 @@ def generateScramble(length=20):
     return scramble
 
 # Uncomment for testing
-scramble = generateScramble()
-print(scramble)
+# scramble = generateScramble()
+# print(scramble)
