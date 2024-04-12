@@ -9,17 +9,17 @@ cv2.namedWindow('image')
 
 # Create trackbars for color change
 # Hue is from 0-179 for OpenCV
-cv2.createTrackbar('HMin', 'image', 0, 179, nothing)
-cv2.createTrackbar('SMin', 'image', 0, 255, nothing)
-cv2.createTrackbar('VMin', 'image', 0, 255, nothing)
-cv2.createTrackbar('HMax', 'image', 0, 179, nothing)
-cv2.createTrackbar('SMax', 'image', 0, 255, nothing)
-cv2.createTrackbar('VMax', 'image', 0, 255, nothing)
+cv2.createTrackbar('hMin', 'image', 0, 179, nothing)
+cv2.createTrackbar('sMin', 'image', 0, 255, nothing)
+cv2.createTrackbar('vMin', 'image', 0, 255, nothing)
+cv2.createTrackbar('hMax', 'image', 0, 179, nothing)
+cv2.createTrackbar('sMax', 'image', 0, 255, nothing)
+cv2.createTrackbar('vMax', 'image', 0, 255, nothing)
 
 # Set initial value for MAX HSV trackbars.
-cv2.setTrackbarPos('HMax', 'image', 179)
-cv2.setTrackbarPos('SMax', 'image', 255)
-cv2.setTrackbarPos('VMax', 'image', 255)
+cv2.setTrackbarPos('hMax', 'image', 179)
+cv2.setTrackbarPos('sMax', 'image', 255)
+cv2.setTrackbarPos('vMax', 'image', 255)
 
 # Initialize HSV min/max values
 hMin = sMin = vMin = hMax = sMax = vMax = 0
@@ -36,12 +36,12 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     # Get trackbar positions
-    hMin = cv2.getTrackbarPos('HMin', 'image')
-    sMin = cv2.getTrackbarPos('SMin', 'image')
-    vMin = cv2.getTrackbarPos('VMin', 'image')
-    hMax = cv2.getTrackbarPos('HMax', 'image')
-    sMax = cv2.getTrackbarPos('SMax', 'image')
-    vMax = cv2.getTrackbarPos('VMax', 'image')
+    hMin = cv2.getTrackbarPos('hMin', 'image')
+    sMin = cv2.getTrackbarPos('sMin', 'image')
+    vMin = cv2.getTrackbarPos('vMin', 'image')
+    hMax = cv2.getTrackbarPos('hMax', 'image')
+    sMax = cv2.getTrackbarPos('sMax', 'image')
+    vMax = cv2.getTrackbarPos('vMax', 'image')
 
     # Set minimum and maximum HSV values to display
     lower = np.array([hMin, sMin, vMin])
@@ -69,4 +69,3 @@ while True:
         break
 
 cv2.destroyAllWindows()
-
