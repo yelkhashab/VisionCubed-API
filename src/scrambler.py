@@ -1,6 +1,6 @@
 import random
 
-def generate_scramble(length=20):
+def generateScramble(length=20):
     '''
     Generates a Rubik's Cube scramble of specified length.
     '''
@@ -28,5 +28,5 @@ def generate_scramble(length=20):
     return scramble
 
 # Uncomment for testing
-scramble = generate_scramble()
+scramble = generateScramble()
 print(scramble)
