@@ -7,36 +7,31 @@ def processImage(encodedImage):
     decodedImage = np.frombuffer(base64.b64decode(encodedImage), dtype=np.uint8)
     reconstructedImage = cv2.imdecode(decodedImage, 1)
     labImage = cv2.cvtColor(reconstructedImage, cv2.COLOR_BGR2LAB)
-
     croppedImage = labImage[17:161, 45:189]
-
     return croppedImage
 
 def calculateCenterColors(faceIndex, centerColors, centerPiece):
     centerPoint = centerPiece[24, 24]
-    normalizedCenterPoint = (centerPoint[0] / 2.55,
-                             centerPoint[1] - 128,
-                             centerPoint[2] - 128)
-
+    normalizedCenterPoint = (centerPoint[0] / 2.55, centerPoint[1] - 128, centerPoint[2] - 128)
     faceOrder = ["R", "B", "O", "G", "W", "Y"]
     centerColors[faceOrder[faceIndex]] = normalizedCenterPoint
 
 def findClosestColor(targetSquare, referenceColors):
     closestColor = ""
-    minDistance = math.inf
+    minDelta = math.inf
 
     targetPoint = targetSquare[24, 24]
-    normalizedTargetPoint = (targetPoint[0] / 2.55,
-                             targetPoint[1] - 128,
-                             targetPoint[2] - 128)
+    normalizedTargetPoint = (targetPoint[0] / 2.55, targetPoint[1] - 128, targetPoint[2] - 128)
 
     for color, referencePoint in referenceColors.items():
-        distance = math.sqrt(((referencePoint[0] - normalizedTargetPoint[0]) ** 2) +
-                             ((referencePoint[1] - normalizedTargetPoint[1]) ** 2) +
-                             ((referencePoint[2] - normalizedTargetPoint[2]) ** 2))
+        delta = math.sqrt(
+            ((referencePoint[0] - normalizedTargetPoint[0]) ** 2) +
+            ((referencePoint[1] - normalizedTargetPoint[1]) ** 2) +
+            ((referencePoint[2] - normalizedTargetPoint[2]) ** 2)
+        )
 
-        if distance < minDistance:
-            minDistance = distance
+        if delta < minDelta:
+            minDelta = delta
             closestColor = color
 
     return closestColor
