@@ -1,7 +1,7 @@
 import kociemba
 
 def convertToNet(state):
-    """
+    '''
     This function takes a dictionary of faces where each face is represented
     by an array of nine cubies and their colors. The cubies are ordered as shown
     in the net below. It replaces the colors with the letters U, R, F, D, L, and B, 
@@ -31,12 +31,20 @@ def convertToNet(state):
     The function returns a string that represents the state of the cube in the 
     format that Kociemba's algorithm expects. The pieces are ordered as follows:
     U1U2U3...R1R2R3...F1F2F3...D1D2D3...L1L2L3...B1B2B3...
-    """
+    '''
     order = ['U', 'R', 'F', 'D', 'L', 'B']
     net = ''
-    conversion_dict = {'W': 'U', 'B': 'R', 'R': 'F', 'Y': 'D', 'G': 'L', 'O': 'B'}
+    colorToFace = {
+        'W': 'U',
+        'B': 'R',
+        'R': 'F',
+        'Y': 'D',
+        'G': 'L',
+        'O': 'B'
+    }
+    
     for face in order:
-        net += ''.join([conversion_dict[letter] for letter in state[face]])
+        net += ''.join([colorToFace[letter] for letter in state[face]])
     return net
 
 def solve(state):
