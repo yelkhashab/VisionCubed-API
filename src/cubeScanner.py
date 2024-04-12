@@ -36,7 +36,7 @@ def findClosestColor(targetSquare, referenceColors):
 
     return closestColor
 
-def extractCubeState(encodedImages):
+def scan(encodedImages):
     faceColors = [[[None] * 3 for _ in range(3)] for _ in range(6)]
     centerColors = {}
 
