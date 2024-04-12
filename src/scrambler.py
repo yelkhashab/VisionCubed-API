@@ -1,28 +1,31 @@
 import random
 
 def generate_scramble(length=20):
-    """
+    '''
     Generates a Rubik's Cube scramble of specified length.
-    
-    Args:
-    - length: The number of moves in the scramble. Default is 20.
-    
-    Returns:
-    - A list of moves as a scramble.
-    """
+    '''
     moves = ['R', 'L', 'U', 'D', 'F', 'B']
     modifiers = ['', "'", '2']
     scramble = []
-    last_move = ''
+    lastTwoMoves = ['X', 'Y']
+    
+    layerPairs = {'R': 'L', 'L': 'R', 'U': 'D', 'D': 'U', 'F': 'B', 'B': 'F'}
     
     while len(scramble) < length:
         move = random.choice(moves)
-        if move == last_move:
-            continue  # Avoid repeating the same move
+        # Prevent using the same layer in immediate succession
+        if move == lastTwoMoves[-1]:
+            continue
+        # Prevent making redundant moves
+        if len(scramble) >= 1:
+            if move == layerPairs[lastTwoMoves[-1]] and move == lastTwoMoves[-2]:
+                continue
         modifier = random.choice(modifiers)
-        scramble.append(move + modifier)
-        last_move = move
-        
+        fullMove = move + modifier
+        scramble.append(fullMove)
+        lastTwoMoves.pop(0)
+        lastTwoMoves.append(move)
+        print(lastTwoMoves)
     return scramble
 
 # Uncomment for testing
