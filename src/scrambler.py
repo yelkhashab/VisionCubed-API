@@ -25,7 +25,6 @@ def generate_scramble(length=20):
         scramble.append(fullMove)
         lastTwoMoves.pop(0)
         lastTwoMoves.append(move)
-        print(lastTwoMoves)
     return scramble
 
 # Uncomment for testing
