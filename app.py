@@ -24,10 +24,10 @@ def scan_image():
 
 @app.route('/api/scramble', methods=['GET'])
 def api_scramble():
-    scramble = generate_scramble()
+    scramble = generateScramble()
     cube = RubiksCube()  # Create a new cube
-    cube.apply_moves(scramble)  # Apply the scramble to the cube
-    state = cube.get_state()
+    cube.applyMoves(scramble)  # Apply the scramble to the cube
+    state = cube.getState()
     print("Scramble: ", scramble)
     print("State: ", state)
     return jsonify({'scramble': scramble, 'state': state})  # Make sure to return serializable data
@@ -36,7 +36,7 @@ def api_scramble():
 def api_solve():
     state = request.get_json()  # Get the state dictionary from the request
     solution = solve(state)  # Call the solve function with the state dictionary
-    return jsonify({'solution': solution})  # Return the result as a JSON response
+    return jsonify(solution)  # Return the result as a JSON response
 
 if __name__ == '__main__':
     app.run(debug=True)  
