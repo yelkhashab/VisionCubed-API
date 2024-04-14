@@ -173,12 +173,12 @@ def updateStateForBMove(state, rotation):
 class RubiksCube:
     def __init__(self, state=None):
         self.state = state or {
-            'F': ['R']*9,
-            'B': ['O']*9,
+            'F': ['G']*9,
+            'B': ['B']*9,
             'U': ['W']*9,
             'D': ['Y']*9,
-            'L': ['G']*9,
-            'R': ['B']*9,
+            'L': ['O']*9,
+            'R': ['R']*9,
         }
     
     def applyMove(self, move):
