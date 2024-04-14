@@ -13,7 +13,7 @@ def processImage(encodedImage):
 def calculateCenterColors(faceIndex, centerColors, centerPiece):
     centerPoint = centerPiece[24, 24]
     normalizedCenterPoint = (centerPoint[0] / 2.55, centerPoint[1] - 128, centerPoint[2] - 128)
-    faceOrder = ["R", "B", "O", "G", "W", "Y"]
+    faceOrder = ["G", "R", "B", "O", "W", "Y"]
     centerColors[faceOrder[faceIndex]] = normalizedCenterPoint
 
 def findClosestColor(targetSquare, referenceColors):
