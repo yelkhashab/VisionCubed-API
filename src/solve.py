@@ -36,22 +36,39 @@ def convertToNet(state):
     net = ''
     colorToFace = {
         'W': 'U',
-        'B': 'R',
-        'R': 'F',
+        'B': 'B',
+        'R': 'R',
         'Y': 'D',
-        'G': 'L',
-        'O': 'B'
+        'G': 'F',
+        'O': 'L'
     }
     
     for face in order:
         net += ''.join([colorToFace[letter] for letter in state[face]])
     return net
 
+def getInverseSolution(solution):
+    inverse_moves = []
+    moves = solution.split()
+    for move in moves:
+        if "'" in move:
+            inverse_moves.append(move[:-1])
+        elif "2" in move:
+            inverse_moves.append(move)
+        else:
+            inverse_moves.append(move + "'")
+    inverse_moves.reverse()
+    inverse_solution = ' '.join(inverse_moves)
+    return inverse_solution
+
 def solve(state):
     net = convertToNet(state)
+    solution = kociemba.solve(net)
+    inverse = getInverseSolution(solution)
     res = {
         'net': net,
-        'solution': kociemba.solve(net)
+        'solution': solution,
+        'inverse': inverse
     }
     return res
 
