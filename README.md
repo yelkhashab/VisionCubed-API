@@ -1,4 +1,68 @@
 # VisionCubed
+## Running the Project Locally
+
+Follow these steps to run the project on your local machine:
+
+1. **Clone the repository to your local machine**
+
+    ```bash
+    git clone https://github.com/yelkhashab/VisionCubed-API.git
+    ```
+
+2. **Navigate to the project directory**
+
+    ```bash
+    cd VisionCubed-API
+    ```
+
+3. **Create a virtual environment**
+
+    On macOS and Linux:
+
+    ```bash
+    python3 -m venv venv
+    ```
+
+    On Windows:
+
+    ```bash
+    py -m venv venv
+    ```
+
+4. **Activate the virtual environment**
+
+    On macOS and Linux:
+
+    ```bash
+    source venv/bin/activate
+    ```
+
+    On Windows:
+
+    ```bash
+    .\venv\Scripts\activate
+    ```
+
+5. **Install the requirements**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+6. **Copy the sample Flask environment file and adjust if necessary**
+
+    ```bash
+    cp .flaskenv_sample .flaskenv
+    ```
+
+7. **Run the Flask application**
+
+    ```bash
+    flask run
+    ```
+
+After running this command, you should see output indicating that the server is running. You can access the application at `http://localhost:8080` in your web browser.
+
 ## Overview
 
 This project aims to develop an interactive 3D Rubik's Cube solver that allows users to solve a Rubik's Cube puzzle with the aid of a computer vision model. By using a webcam, the application will recognize the current scrambled state of a Rubik's Cube, compute the optimal solution, and visually guide the user through each step of the solution with an animated 3D model.
@@ -21,9 +85,9 @@ Scramble Algorithm: Generates a random set of moves to scramble a cube.
 ## Implementation
 ### Tech Stack
 
-Frontend: React for building the user interface, Three.js/Spline for 3D modeling and animation.  
-Backend: Python Flask for handling the computer vision processing and solution computation. Possibly Knex for api routes. Possibly MySQL for database of user practice history.  
-Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, possibly Socket.IO for real-time communication between the frontend and backend.  
+Frontend: React for building the user interface, Three.js for 3D modeling and animation.  
+Backend: Python Flask for handling the computer vision processing and solution computation. 
+Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, roofpig.js for 3D cube render and animation
 
 ### APIs
 
@@ -36,9 +100,6 @@ Home Page:
      
 Solve Page:  
 			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.  
-     
-Learn Page:  
-			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow along a solution using the Beginner's Method to solve the cube.  
      
 Practice Page:  
 			The user can generate a scramble then start a timer to practice solving the cube and track progression.  
@@ -53,11 +114,6 @@ Practice Page:
 
 ![VisionCubed Solve 1](https://github.com/yelkhashab/VisionCubed/assets/88597501/a60cfa60-eff4-4b89-a6a0-9991dfbced29)
 ![VisionCubed Solve 2](https://github.com/yelkhashab/VisionCubed/assets/88597501/bafd15b3-6c5f-4cf5-859c-0e83150a86b3)
-
-### Learn
-
-![VisionCubed Learn 1](https://github.com/yelkhashab/VisionCubed/assets/88597501/8a9a7624-fb9f-4999-87d4-c4ed9d62f272)
-![VisionCubed Learn 2](https://github.com/yelkhashab/VisionCubed/assets/88597501/edac6757-caa1-43a9-9261-8231bf111c6b)
 
 ### Practice
 
