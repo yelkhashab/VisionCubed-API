@@ -1,4 +1,68 @@
 # VisionCubed
+## Running the Project Locally
+
+Follow these steps to run the project on your local machine:
+
+1. **Clone the repository to your local machine**
+
+    ```bash
+    git clone https://github.com/yelkhashab/VisionCubed-API.git
+    ```
+
+2. **Navigate to the project directory**
+
+    ```bash
+    cd VisionCubed-API
+    ```
+
+3. **Create a virtual environment**
+
+    On macOS and Linux:
+
+    ```bash
+    python3 -m venv venv
+    ```
+
+    On Windows:
+
+    ```bash
+    py -m venv venv
+    ```
+
+4. **Activate the virtual environment**
+
+    On macOS and Linux:
+
+    ```bash
+    source venv/bin/activate
+    ```
+
+    On Windows:
+
+    ```bash
+    .\venv\Scripts\activate
+    ```
+
+5. **Install the requirements**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+6. **Copy the sample Flask environment file and adjust if necessary**
+
+    ```bash
+    cp .flaskenv_sample .flaskenv
+    ```
+
+7. **Run the Flask application**
+
+    ```bash
+    flask run
+    ```
+
+After running this command, you should see output indicating that the server is running. You can access the application at `http://localhost:8080` in your web browser.
+
 ## Overview
 
 This project aims to develop an interactive 3D Rubik's Cube solver that allows users to solve a Rubik's Cube puzzle with the aid of a computer vision model. By using a webcam, the application will recognize the current scrambled state of a Rubik's Cube, compute the optimal solution, and visually guide the user through each step of the solution with an animated 3D model.
