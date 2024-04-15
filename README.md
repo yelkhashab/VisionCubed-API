@@ -21,9 +21,9 @@ Scramble Algorithm: Generates a random set of moves to scramble a cube.
 ## Implementation
 ### Tech Stack
 
-Frontend: React for building the user interface, Three.js/Spline for 3D modeling and animation.  
-Backend: Python Flask for handling the computer vision processing and solution computation. Possibly Knex for api routes. Possibly MySQL for database of user practice history.  
-Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, possibly Socket.IO for real-time communication between the frontend and backend.  
+Frontend: React for building the user interface, Three.js for 3D modeling and animation.  
+Backend: Python Flask for handling the computer vision processing and solution computation. 
+Libraries: cv2 for color detection and image processing, Kociemba for solving algorithm, roofpig.js for 3D cube render and animation
 
 ### APIs
 
@@ -36,9 +36,6 @@ Home Page:
      
 Solve Page:  
 			Where users interact with the webcam feed, view the detected cube state, and follow along with the solution animation.  
-     
-Learn Page:  
-			Where a user will be introduced to the basics of how to  solve a 3x3 cube. They can then generate a scramble and follow along a solution using the Beginner's Method to solve the cube.  
      
 Practice Page:  
 			The user can generate a scramble then start a timer to practice solving the cube and track progression.  
@@ -53,11 +50,6 @@ Practice Page:
 
 ![VisionCubed Solve 1](https://github.com/yelkhashab/VisionCubed/assets/88597501/a60cfa60-eff4-4b89-a6a0-9991dfbced29)
 ![VisionCubed Solve 2](https://github.com/yelkhashab/VisionCubed/assets/88597501/bafd15b3-6c5f-4cf5-859c-0e83150a86b3)
-
-### Learn
-
-![VisionCubed Learn 1](https://github.com/yelkhashab/VisionCubed/assets/88597501/8a9a7624-fb9f-4999-87d4-c4ed9d62f272)
-![VisionCubed Learn 2](https://github.com/yelkhashab/VisionCubed/assets/88597501/edac6757-caa1-43a9-9261-8231bf111c6b)
 
 ### Practice
 
