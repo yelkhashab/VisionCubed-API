@@ -4,3 +4,4 @@ requests==2.25.1
 opencv-python==4.9.0.80
 numpy==1.26.4
 kociemba==1.2.1
+gunicorn==20.1.0
