@@ -1,6 +1,6 @@
-Flask==3.0.2
+Flask==2.0.1
 Flask-CORS==3.0.10
 requests==2.25.1
-opencv-python
-numpy
-kociemba
+opencv-python==4.9.0.80
+numpy==1.26.4
+kociemba==1.2.1
