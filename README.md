@@ -1,4 +1,10 @@
-# VisionCubed
+# VisionCubed API
+
+**[Try it out!](http://www.visioncubed.xyz/)**
+
+**Designed to run with corresponning frontend:**
+[https://github.com/yelkhashab/VisionCubed-API](https://github.com/yelkhashab/VisionCubed)
+
 ## Running the Project Locally
 
 Follow these steps to run the project on your local machine:
